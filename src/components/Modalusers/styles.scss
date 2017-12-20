@@ -1,0 +1,28 @@
+@import "../../theme/palette"; // import of colors
+
+.modalusers {
+  background: white;
+  padding: 8px 0;
+  margin: 0;
+  top: 20px;
+  position: absolute;
+  z-index: 1;
+  width: 150px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.3);
+  list-style: none;
+
+  li {
+    font-size: 16px;
+    font-family: "Raleway", sans-serif;
+    line-height: 24px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    padding: 0 20px;
+    text-transform: capitalize;
+    &:hover {
+      background: #f1f1f1;
+    }
+
+  }
+}

@@ -1,0 +1,27 @@
+@import "../../theme/palette"; // import of colors
+
+.createbutton {
+  background: $green;
+  width: 360px;
+  height: 75px;
+  color: $paletteColor2;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 75px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 0px 0 rgba(0,0,0,0.0);
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.3);
+  }
+
+
+}
+.create {
+
+}

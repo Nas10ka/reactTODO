@@ -1,0 +1,54 @@
+@import '../../theme/palette';
+@import "../../theme/animations";
+@import "../Todo/styles.scss";
+
+* {
+    box-sizing: border-box;
+}
+body {
+    overflow-x: hidden;
+}
+.feed {
+    display: flex;
+    align-items: stretch;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 100vw;
+    max-width: 100%;
+    min-height: 100vh;
+    background-color: $paletteColor3;
+    border: 1px solid $border;
+
+    .left{
+        width: 400px;
+        padding: 20px;
+        background-color: $paletteColor2;
+        border-right: 1px solid $border;
+    }
+    .right {
+        width: calc(100% - 400px);
+        background-color: $paletteColor2;
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    }
+    .notask {
+        text-align: center;
+        font-size: 48px;
+        color: $placeholder;
+        margin: 30px 0;
+        font-family: "Raleway", sans-serif;
+        font-weight: 900;
+    }
+    &Users {
+        padding: 0;
+        position: relative;
+        padding:0;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+
+    }
+}

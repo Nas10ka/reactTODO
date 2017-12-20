@@ -1,0 +1,27 @@
+@import "../../theme/palette"; // import of colors
+.addUser {
+  display: block;
+  position: relative;
+  font-family: "Raleway", sans-serif;
+  color: #60c84c;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #60c84c;
+  text-transform: capitalize;
+  line-height: 60px;
+  font-size: 50px;
+  text-align: center;
+  cursor: pointer;
+
+
+}
+.addNewUser {
+  padding: 20px 25px;
+  font-family: "Raleway", sans-serif;
+  font-style: 16px;
+  color: #2b2b2b;
+  border-radius:4px;
+  border: 1px solid #bebebe;
+  background: white;
+}

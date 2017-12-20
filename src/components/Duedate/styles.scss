@@ -1,0 +1,21 @@
+@import '../../theme/palette';
+
+.datepicker {
+  z-index: 1;
+  position: absolute;
+  top: 30px;
+  left: 260px;
+  width: 180px;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  margin: 18px 12px;
+  &::placeholder {
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+  }
+}

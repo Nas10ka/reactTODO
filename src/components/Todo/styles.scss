@@ -1,0 +1,128 @@
+@import "../../theme/palette"; // import of colors
+
+.todo {
+  position: relative;
+  background: $task;
+  padding: 30px 30px 30px 75px;
+  border-bottom: 1px solid $border;
+  span {
+    color: $border;
+    position: absolute;
+    border: 2px solid $border;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    text-align: center;
+    left: 25px;
+    top: 30px;
+    font-weight: bold;
+    font-family: "Raleway", sans-serif;
+    cursor: pointer;
+
+  }
+  h3 {
+    margin: 0 0 5px;
+    color: $taskName;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    
+  }
+  p {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    color: $paletteColor4;
+  }
+
+}
+
+.todone {
+  position: relative;
+  background: $task;
+  padding: 30px 30px 30px 75px;
+  border-bottom: 1px solid $border;
+  span {
+    position: absolute;
+    border: 2px solid $green;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    text-align: center;
+    left: 25px;
+    top: 30px;
+    font-weight: bold;
+    font-family: "Raleway", sans-serif;
+    cursor: pointer;
+    color: $green;
+  }
+  h3 {
+       margin: 0 0 5px;
+       font-family: 'Raleway', sans-serif;
+       font-weight: 800;
+       font-size: 18px;
+       line-height: 25px;
+
+     }
+  p {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+  }
+  p, h3{
+    text-decoration: line-through;
+    color: $paletteColor5;
+  }
+
+}
+.delete {
+  height: 12px;
+  width: 12px;
+  color: $paletteColor5;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 12px;
+  cursor: pointer;
+  -webkit-transition: color 0.4s ease-out;
+  -moz-transition: color 0.4s ease-out;
+  -ms-transition: color 0.4s ease-out;
+  -o-transition: color 0.4s ease-out;
+  transition: color 0.4s ease-out;
+  &:hover {
+    color: $paletteColor6;
+  }
+
+}
+
+.overdude {
+  color: red!important;
+  font-family: "Raleway", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+.deadline {
+  color: $green!important;
+  font-family: "Raleway", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+
+}
+.duedate {
+  font-family: "Raleway", sans-serif;
+  font-size: 12px;
+  color: #ccc;
+  position: absolute;
+  top: 15px;
+  font-weight: 300;
+}

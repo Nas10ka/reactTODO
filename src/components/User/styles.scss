@@ -1,0 +1,36 @@
+@import "../../theme/palette"; // import of colors
+
+.modalUser {
+
+}
+.user {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 4px;
+  list-style: none;
+  flex-flow: column wrap;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 60px;
+  font-size: 30px;
+  &:nth-of-type(2n+1) {
+    background: #39527b;
+  }
+  &:nth-of-type(2n+2) {
+    background: #60c84c;
+  }
+  &:nth-of-type(2n+3) {
+    background: #ffc952;
+  }
+  &:nth-of-type(2n+4) {
+    background: #ff7473;
+  }
+  &:nth-of-type(2n+5) {
+    background: #73a8ff;
+  }
+
+}
