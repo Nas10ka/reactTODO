@@ -20,17 +20,17 @@ export default class Modal extends Component {
     }
 
     state = {
-        description: '',
-        duedate: '',
-        finishDate:  '',
-        id:          v4(),
-        modalActive: this.props,
-        overdue:    'false',
-        setDate:     false,
-        taskDone:    'true',
-        taskName:    '',
-        taskUserName: '',
-        userListActive: false,
+        description:    '',
+        duedate:        '',
+        finishDate:     '',
+        id:             v4(),
+        modalActive:    this.props,
+        overdue:        'false',
+        setDate:        false,
+        taskDone:       'true',
+        taskName:       '',
+        taskUserName:   '',
+        userListActive: false
     };
 
     closeModal () {
@@ -52,13 +52,12 @@ export default class Modal extends Component {
         });
     }
 
-    setUserName(taskUserName) {
+    setUserName (taskUserName) {
         if (taskUserName) {
             this.setState({
                 taskUserName
             });
             console.log('taskUserName 1', taskUserName);
-
         } else {
             console.log('taskUserName 2', taskUserName);
         }
@@ -83,12 +82,12 @@ export default class Modal extends Component {
             if (finishDate > now) {
                 this.setState({
                     overdue: 'false',
-                    duedate:  `Due Date finish ${duedate}`
+                    duedate: `Due Date finish ${duedate}`
                 });
             } else {
                 this.setState({
                     overdue: 'true',
-                    duedate:  `Due Date finished ${duedate}`
+                    duedate: `Due Date finished ${duedate}`
                 });
             }
         }
@@ -120,9 +119,9 @@ export default class Modal extends Component {
 
                 this.props.closeModal(false);
                 this.setState({
-                    taskName:    '',
-                    description: '',
-                    finishDate:  '',
+                    taskName:     '',
+                    description:  '',
+                    finishDate:   '',
                     taskUserName: ''
                 });
             } else {
@@ -140,22 +139,28 @@ export default class Modal extends Component {
         });
     }
 
-    usersListActive() {
+    usersListActive () {
         const userListActive = this.state.userListActive;
-        if(!userListActive) {
+
+        if (!userListActive) {
             this.setState({
                 userListActive: true
-            })
+            });
         } else {
             this.setState({
                 userListActive: false
-            })
+            });
         }
     }
 
     render () {
         const { modalActive } = this.props;
-        const { id: inputId, description, taskName, userListActive } = this.state;
+        const {
+            id: inputId,
+            description,
+            taskName,
+            userListActive
+        } = this.state;
         const setDate = this.state.setDate;
 
         if (modalActive) {
@@ -172,7 +177,9 @@ export default class Modal extends Component {
                         <form
                             className = { Styles.modalBody }
                             onKeyDown = { this.handlerEnter }>
-                            <span onClick={ this.usersListActive } className = { Styles.username }>
+                            <span
+                                onClick = { this.usersListActive }
+                                className = { Styles.username }>
                                 <span className = { Styles.usernameImage }>
                                     &#8330;
                                 </span>
@@ -180,7 +187,12 @@ export default class Modal extends Component {
                                     User Name
                                 </span>
                             </span>
-                            { userListActive ? <Modalusers setUserName = { this.setUserName } userListActive = { userListActive } />  : null }
+                            {userListActive ? (
+                                <Modalusers
+                                    setUserName = { this.setUserName }
+                                    userListActive = { userListActive }
+                                />
+                            ) : null}
                             <span
                                 className = { Styles.calendar }
                                 onClick = { this.setDate }>

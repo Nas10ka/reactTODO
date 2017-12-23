@@ -28,6 +28,7 @@ export default class Feed extends Component {
         this.saveUser = ::this.saveUser;
         this.updateTodoList = ::this.updateTodoList;
         this.updateUserList = ::this.updateUserList;
+        this.tasksFilterByUsername = ::this.tasksFilterByUsername;
     }
     state = {
         showModal:        false,
@@ -151,10 +152,27 @@ export default class Feed extends Component {
             inputName: status
         });
     }
+    tasksFilterByUsername (usernameFilter) {
+        let todos = localStorage.getItem('todos');
+        const todosArr = JSON.parse(todos);
+        if (todosArr) {
+            const filteredTodoByUsername = todosArr.filter((obj, i) => {
+                if (obj.taskUserName == usernameFilter) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            });
+
+            this.setState({
+                todosArr: filteredTodoByUsername
+            });
+        }
+    }
 
     render () {
         const { inputName, todosArr, users } = this.state;
-        console.log(todosArr);
 
         if (todosArr) {
             var todo = todosArr.map((props) => (
@@ -177,7 +195,13 @@ export default class Feed extends Component {
             ));
         }
         if (users) {
-            var user = users.map((props) => <User key = { v4() } user = { props } />);
+            var user = users.map((props) => (
+                <User
+                    key = { v4() }
+                    tasksFilterByUsername = { this.tasksFilterByUsername }
+                    user = { props }
+                />
+            ));
         }
 
         return (
@@ -188,7 +212,9 @@ export default class Feed extends Component {
                         updateTodoList = { this.updateTodoList }
                     />
                     <Date />
-                    {users ? <ul className={ Styles.feedUsers }>{[user]}</ul> : null}
+                    {users ? (
+                        <ul className = { Styles.feedUsers }>{[user]}</ul>
+                    ) : null}
                     <Createuser
                         addNewUser = { this.addNewUser }
                         inputName = { inputName }

@@ -49,12 +49,15 @@ export default class Createuser extends Component {
 
         return (
             <div>
-                <div onClick = { this.addUser } className = { Styles.addUser } title="Add new people - press space bar">
-                   +
+                <div
+                    onClick = { this.addUser }
+                    className = { Styles.addUser }
+                    title = 'Add new people - press space bar'>
+                    +
                 </div>
                 {inputName ? (
                     <input
-                        className={ Styles.addNewUser }
+                        className = { Styles.addNewUser }
                         onKeyDown = { this.handlerEnterName }
                         onChange = { this.handleInputNameChange }
                         placeholder = 'Add new User'

@@ -45,12 +45,12 @@ export default class Todo extends Component {
                 </span>
                 <h3>{taskName}</h3>
                 <p>{description}</p>
-                {
-                    taskUserName ? (<p><br/>User: <b>{taskUserName}</b></p>) :  (null)
-                }
-                {
-
-                    `${canDelete}` == 'true' ? (
+                {taskUserName ? (
+                    <p>
+                        <br />User: <b>{taskUserName}</b>
+                    </p>
+                ) : null}
+                {`${canDelete}` == 'true' ? (
                     <i
                         onClick = { this.deleteTask }
                         id = { id }
