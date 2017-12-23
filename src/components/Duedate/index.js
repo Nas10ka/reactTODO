@@ -12,6 +12,7 @@ export default class Duedate extends Component {
     setDate (event) {
         event.preventDefault();
         const { value: finishDate } = event.target;
+        console.log(finishDate);
 
         this.setState({
             finishDate

@@ -28,7 +28,7 @@ export default class Todo extends Component {
             classes,
             canDelete,
             finishDate,
-            overdude,
+            overdue,
             duedate,
             taskUserName
         } = this.props;
@@ -59,8 +59,8 @@ export default class Todo extends Component {
                         &times;
                     </i>
                 ) : finishDate ?
-                    `${overdude}` == 'true' ? (
-                        <b className = { Styles.overdude }>
+                    `${overdue}` == 'true' ? (
+                        <b className = { Styles.overdue }>
                             <br />Deadline passed: {finishDate}
                         </b>
                     ) : (

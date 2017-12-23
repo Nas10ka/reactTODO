@@ -154,6 +154,7 @@ export default class Feed extends Component {
 
     render () {
         const { inputName, todosArr, users } = this.state;
+        console.log(todosArr);
 
         if (todosArr) {
             var todo = todosArr.map((props) => (
@@ -169,7 +170,7 @@ export default class Feed extends Component {
                     finishDate = { props.finishDate ? props.finishDate : null }
                     key = { props.id }
                     id = { props.id }
-                    overdude = { props.overdude }
+                    overdue = { props.overdue }
                     taskName = { props.taskName }
                     taskUserName = { props.taskUserName }
                 />

@@ -21,10 +21,11 @@ export default class Modal extends Component {
 
     state = {
         description: '',
+        duedate: '',
         finishDate:  '',
         id:          v4(),
         modalActive: this.props,
-        overdude:    'false',
+        overdue:    'false',
         setDate:     false,
         taskDone:    'true',
         taskName:    '',
@@ -69,7 +70,7 @@ export default class Modal extends Component {
             description,
             duedate,
             finishDate,
-            overdude,
+            overdue,
             taskName,
             taskUserName
         } = this.state;
@@ -77,16 +78,16 @@ export default class Modal extends Component {
         const now = moment().format('YYYY-MM-DD');
 
         if (finishDate) {
-            const duedate = moment(finishDate, 'YYYYMMDD').fromNow();
+            const duedate = moment(finishDate, 'YYYY-MM-DD').fromNow();
 
             if (finishDate > now) {
                 this.setState({
-                    overdude: 'false',
+                    overdue: 'false',
                     duedate:  `Due Date finish ${duedate}`
                 });
             } else {
                 this.setState({
-                    overdude: 'true',
+                    overdue: 'true',
                     duedate:  `Due Date finished ${duedate}`
                 });
             }
@@ -103,7 +104,7 @@ export default class Modal extends Component {
                         description,
                         taskDone: 'false',
                         finishDate,
-                        overdude,
+                        overdue,
                         taskUserName,
                         duedate
                     });
