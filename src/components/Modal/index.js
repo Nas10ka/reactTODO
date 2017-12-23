@@ -3,6 +3,7 @@ import { v4 } from 'uuid';
 import Duedate from '../Duedate';
 import moment from 'moment';
 import calendar from '../../theme/assets/calendar.png';
+import Modalprojects from '../Modalprojects';
 import Modalusers from '../Modalusers';
 
 import Styles from './styles';
@@ -14,23 +15,27 @@ export default class Modal extends Component {
         this.handlerEnter = ::this.handlerEnter;
         this.handleTextAreaChange = ::this.handleTextAreaChange;
         this.handleInputChange = ::this.handleInputChange;
+        this.projectsListActive = ::this.projectsListActive;
         this.setDate = ::this.setDate;
+        this.setProjectName = ::this.setProjectName;
         this.setUserName = ::this.setUserName;
         this.usersListActive = ::this.usersListActive;
     }
 
     state = {
-        description:    '',
-        duedate:        '',
-        finishDate:     '',
-        id:             v4(),
-        modalActive:    this.props,
-        overdue:        'false',
-        setDate:        false,
-        taskDone:       'true',
-        taskName:       '',
-        taskUserName:   '',
-        userListActive: false
+        description:       '',
+        duedate:           '',
+        finishDate:        '',
+        id:                v4(),
+        modalActive:       this.props,
+        overdue:           'false',
+        setDate:           false,
+        taskDone:          'true',
+        taskName:          '',
+        taskUserName:      '',
+        userListActive:    false,
+        taskProject:       '',
+        projectListActive: false
     };
 
     closeModal () {
@@ -62,6 +67,16 @@ export default class Modal extends Component {
             console.log('taskUserName 2', taskUserName);
         }
     }
+    setProjectName (taskProject) {
+        if (taskProject) {
+            this.setState({
+                taskProject
+            });
+            console.log('taskProject 1', taskProject);
+        } else {
+            console.log('taskProject 2', taskProject);
+        }
+    }
 
     handlerEnter (event) {
         const enterKey = event.keyCode;
@@ -71,6 +86,7 @@ export default class Modal extends Component {
             finishDate,
             overdue,
             taskName,
+            taskProject,
             taskUserName
         } = this.state;
 
@@ -104,6 +120,7 @@ export default class Modal extends Component {
                         taskDone: 'false',
                         finishDate,
                         overdue,
+                        taskProject,
                         taskUserName,
                         duedate
                     });
@@ -113,6 +130,7 @@ export default class Modal extends Component {
                         taskName,
                         description,
                         taskDone: 'false',
+                        taskProject,
                         taskUserName
                     });
                 }
@@ -122,6 +140,7 @@ export default class Modal extends Component {
                     taskName:     '',
                     description:  '',
                     finishDate:   '',
+                    taskProject:  '',
                     taskUserName: ''
                 });
             } else {
@@ -152,6 +171,19 @@ export default class Modal extends Component {
             });
         }
     }
+    projectsListActive () {
+        const projectListActive = this.state.projectListActive;
+
+        if (!projectListActive) {
+            this.setState({
+                projectListActive: true
+            });
+        } else {
+            this.setState({
+                projectListActive: false
+            });
+        }
+    }
 
     render () {
         const { modalActive } = this.props;
@@ -159,6 +191,7 @@ export default class Modal extends Component {
             id: inputId,
             description,
             taskName,
+            projectListActive,
             userListActive
         } = this.state;
         const setDate = this.state.setDate;
@@ -191,6 +224,22 @@ export default class Modal extends Component {
                                 <Modalusers
                                     setUserName = { this.setUserName }
                                     userListActive = { userListActive }
+                                />
+                            ) : null}
+                            <span
+                                onClick = { this.projectsListActive }
+                                className = { Styles.projectname }>
+                                <span className = { Styles.usernameImage }>
+                                    &#8330;
+                                </span>
+                                <span className = { Styles.usernameText }>
+                                    Project Name
+                                </span>
+                            </span>
+                            {projectListActive ? (
+                                <Modalprojects
+                                    setProjectName = { this.setProjectName }
+                                    projectListActive = { projectListActive }
                                 />
                             ) : null}
                             <span

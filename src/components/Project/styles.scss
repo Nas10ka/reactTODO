@@ -1,0 +1,23 @@
+@import "../../theme/palette"; // import of colors
+
+.modalProject {
+
+}
+.project {
+  flex-flow: row wrap;
+  display: flex;
+  width: 100%;
+  color: $taskName;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
+  list-style: none;
+  cursor: pointer;
+  padding: 4px 20px;
+  transition: color 0.3s ease;
+  &:hover {
+    color: darkred;
+  }
+
+}

@@ -51,4 +51,23 @@ body {
         justify-content: flex-start;
 
     }
+    &Projects {
+        padding: 0;
+        position: relative;
+        padding:0;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+
+    }
+
+    .projects {
+        background: white;
+        display: block;
+        border-top: 1px solid $border;
+        border-bottom: 1px solid $border;
+        margin: 15px -20px;
+        padding: 10px 0 ;
+    }
+
 }

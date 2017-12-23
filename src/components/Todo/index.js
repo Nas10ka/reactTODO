@@ -30,6 +30,7 @@ export default class Todo extends Component {
             finishDate,
             overdue,
             duedate,
+            taskProject,
             taskUserName
         } = this.props;
 
@@ -48,6 +49,11 @@ export default class Todo extends Component {
                 {taskUserName ? (
                     <p>
                         <br />User: <b>{taskUserName}</b>
+                    </p>
+                ) : null}
+                {taskProject ? (
+                    <p>
+                        <br />Project: <b>{taskProject}</b>
                     </p>
                 ) : null}
                 {`${canDelete}` == 'true' ? (

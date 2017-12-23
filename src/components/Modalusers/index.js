@@ -77,6 +77,5 @@ export default class Modalusers extends Component {
         }
 
         return null;
-
     }
 }
