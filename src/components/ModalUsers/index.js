@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
 import Styles from './styles';
 import User from '../User';
 
 export default class Modalusers extends Component {
+    static propTypes = {
+        setUserName:    PropTypes.func,
+        userListActive: PropTypes.bool
+    };
+
     constructor () {
         super();
         this.choseUserName = ::this.choseUserName;
         this.getUserList = ::this.getUserList;
     }
     state = {
-        users:          [],
+        taskUser:       '',
         userListActive: false,
-        taskUser:       ''
+        users:          []
     };
     componentWillMount () {
         const { userListActive } = this.props;
@@ -45,9 +51,10 @@ export default class Modalusers extends Component {
     }
     render () {
         const { users, userListActive, taskUser } = this.state;
+        let user = [];
 
         if (users) {
-            var user = users.map((props) => (
+            user = users.map((props) => (
                 <User
                     choseUserName = { this.choseUserName }
                     key = { v4() }

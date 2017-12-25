@@ -4,10 +4,11 @@ import Styles from './styles';
 import Modal from '../Modal';
 
 export default class Createbutton extends Component {
-    static propsTypes = {
-        saveTask:       PropTypes.func,
-        updateTodoList: PropTypes.func
+    static propTypes = {
+        saveTask:       PropTypes.func.isRequired,
+        updateTodoList: PropTypes.func.isRequired
     };
+
     constructor () {
         super();
         this.handleClick = ::this.handleClick;
@@ -36,7 +37,7 @@ export default class Createbutton extends Component {
 
         return (
             <div className = { Styles.create }>
-                <div onClick = { this.handleClick } className = { Styles.createbutton }>
+                <div className = { Styles.createbutton } onClick = { this.handleClick }>
                     ADD NEW TASK
                 </div>
                 <Modal

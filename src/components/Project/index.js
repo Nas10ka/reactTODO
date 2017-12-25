@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Styles from './styles';
 
 export default class Project extends Component {
+    static propTypes = {
+        choseProjectName:     PropTypes.func,
+        modalIs:              PropTypes.bool,
+        project:              PropTypes.any,
+        tasksFilterByProject: PropTypes.func
+    };
+
     constructor () {
         super();
         this.choseProject = ::this.choseProject;
@@ -9,8 +17,8 @@ export default class Project extends Component {
         this.setProjectToTask = ::this.setProjectToTask;
     }
     state = {
-        project:     this.props,
-        firstLetter: 'A'
+        project:     '',
+        firstLetter: ''
     };
     componentWillMount () {
         this.getNameFirstLetter();
@@ -35,7 +43,6 @@ export default class Project extends Component {
     }
     render () {
         const { project, modalIs } = this.props;
-        const { firstLetter } = this.state;
 
         if (modalIs) {
             return (

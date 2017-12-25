@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Styles from './styles';
 
 export default class User extends Component {
+    static propTypes = {
+        choseUserName:         PropTypes.func,
+        modalIs:               PropTypes.bool,
+        tasksFilterByUsername: PropTypes.func,
+        user:                  PropTypes.string
+    };
+
     constructor () {
         super();
         this.choseUser = ::this.choseUser;
@@ -9,8 +17,8 @@ export default class User extends Component {
         this.setUserToTask = ::this.setUserToTask;
     }
     state = {
-        user:        this.props,
-        firstLetter: 'A'
+        firstLetter: 'A',
+        user:        ''
     };
     componentWillMount () {
         this.getNameFirstLetter();
@@ -32,7 +40,6 @@ export default class User extends Component {
         const { user } = this.props;
 
         this.props.tasksFilterByUsername(user);
-        // console.log(user);
     }
     render () {
         const { user, modalIs } = this.props;
@@ -47,9 +54,9 @@ export default class User extends Component {
         }
 
         return (
-            <li className = { Styles.user } onClick = { this.choseUser }>
+            <div className = { Styles.user } onClick = { this.choseUser }>
                 {firstLetter}
-            </li>
+            </div>
         );
     }
 }

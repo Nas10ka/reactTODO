@@ -3,21 +3,37 @@ import PropTypes from 'prop-types';
 import Styles from './styles';
 
 export default class Todo extends Component {
-    static propsTypes = {
-        description: PropTypes.string,
-        taskName:    PropTypes.string
+    static propTypes = {
+        canDelete:    PropTypes.string.isRequired,
+        checkTask:    PropTypes.func.isRequired,
+        classes:      PropTypes.string.isRequired,
+        deleteTask:   PropTypes.func.isRequired,
+        id:           PropTypes.string.isRequired,
+        taskName:     PropTypes.string.isRequired,
+        description:  PropTypes.string,
+        duedate:      PropTypes.string,
+        finishDate:   PropTypes.string,
+        overdue:      PropTypes.string,
+        taskProject:  PropTypes.any,
+        taskUserName: PropTypes.string
     };
+
     constructor () {
         super();
-        this.checkTask = ::this.checkTask;
-        this.deleteTask = ::this.deleteTask;
-    }
-    checkTask () {
-        this.props.checkTask(this.props.id);
+        this.checkTask = ::this._checkTask;
+        this.deleteTask = ::this._deleteTask;
     }
 
-    deleteTask () {
-        this.props.deleteTask(this.props.id);
+    _checkTask () {
+        const { id } = this.props;
+
+        this.props.checkTask(id);
+    }
+
+    _deleteTask () {
+        const { id } = this.props;
+
+        this.props.deleteTask(id);
     }
 
     render () {
@@ -41,7 +57,7 @@ export default class Todo extends Component {
                         <b className = { Styles.duedate }>{duedate}</b>
                     ) : null
                     : null}
-                <span onClick = { this.checkTask } id = { id }>
+                <span id = { id } onClick = { this.checkTask }>
                     &#10003;
                 </span>
                 <h3>{taskName}</h3>
@@ -56,16 +72,16 @@ export default class Todo extends Component {
                         <br />Project: <b>{taskProject}</b>
                     </p>
                 ) : null}
-                {`${canDelete}` == 'true' ? (
+                {`${canDelete}` === 'true' ? (
                     <i
-                        onClick = { this.deleteTask }
-                        id = { id }
                         className = { Styles.delete }
-                        title = 'Delete task'>
+                        id = { id }
+                        title = 'Delete task'
+                        onClick = { this.deleteTask }>
                         &times;
                     </i>
                 ) : finishDate ?
-                    `${overdue}` == 'true' ? (
+                    `${overdue}` === 'true' ? (
                         <b className = { Styles.overdue }>
                             <br />Deadline passed: {finishDate}
                         </b>

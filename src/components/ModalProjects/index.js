@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
 import Styles from './styles';
 import Project from '../Project';
 
 export default class Modalprojects extends Component {
+    static propTypes = {
+        projectListActive: PropTypes.bool,
+        setProjectName:    PropTypes.func
+    };
+
     constructor () {
         super();
         this.choseProjectName = ::this.choseProjectName;
@@ -46,12 +52,14 @@ export default class Modalprojects extends Component {
     render () {
         const { projects, projectListActive, taskProject } = this.state;
 
+        let project = [];
+
         if (projects) {
-            var project = projects.map((props) => (
+            project = projects.map((props) => (
                 <Project
                     choseProjectName = { this.choseProjectName }
                     key = { v4() }
-                    project = { props }
+                    project = { [props] }
                     modalIs
                 />
             ));

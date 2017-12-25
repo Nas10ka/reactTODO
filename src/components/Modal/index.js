@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { v4 } from 'uuid';
-import Duedate from '../Duedate';
+import Duedate from '../DueDate';
 import moment from 'moment';
 import calendar from '../../theme/assets/calendar.png';
-import Modalprojects from '../Modalprojects';
-import Modalusers from '../Modalusers';
-
+import Modalprojects from '../ModalProjects';
+import Modalusers from '../ModalUsers';
+import PropTypes from 'prop-types';
 import Styles from './styles';
 
 export default class Modal extends Component {
+    static propTypes = {
+        closeModal:     PropTypes.func,
+        modalActive:    PropTypes.bool,
+        saveTask:       PropTypes.func,
+        updateTodoList: PropTypes.func
+    };
+
     constructor () {
         super();
         this.closeModal = ::this.closeModal;
@@ -24,18 +31,17 @@ export default class Modal extends Component {
 
     state = {
         description:       '',
-        duedate:           '',
         finishDate:        '',
         id:                v4(),
         modalActive:       this.props,
         overdue:           'false',
+        projectListActive: false,
         setDate:           false,
         taskDone:          'true',
         taskName:          '',
-        taskUserName:      '',
-        userListActive:    false,
         taskProject:       '',
-        projectListActive: false
+        taskUserName:      '',
+        userListActive:    false
     };
 
     closeModal () {
@@ -62,9 +68,6 @@ export default class Modal extends Component {
             this.setState({
                 taskUserName
             });
-            console.log('taskUserName 1', taskUserName);
-        } else {
-            console.log('taskUserName 2', taskUserName);
         }
     }
     setProjectName (taskProject) {
@@ -72,9 +75,6 @@ export default class Modal extends Component {
             this.setState({
                 taskProject
             });
-            console.log('taskProject 1', taskProject);
-        } else {
-            console.log('taskProject 2', taskProject);
         }
     }
 
@@ -82,7 +82,6 @@ export default class Modal extends Component {
         const enterKey = event.keyCode;
         const {
             description,
-            duedate,
             finishDate,
             overdue,
             taskName,
@@ -92,8 +91,10 @@ export default class Modal extends Component {
 
         const now = moment().format('YYYY-MM-DD');
 
+        let duedate = '';
+
         if (finishDate) {
-            const duedate = moment(finishDate, 'YYYY-MM-DD').fromNow();
+            duedate = moment(finishDate, 'YYYY-MM-DD').fromNow();
 
             if (finishDate > now) {
                 this.setState({
@@ -112,7 +113,7 @@ export default class Modal extends Component {
             event.preventDefault();
 
             if (taskName) {
-                if (finishDate != '') {
+                if (finishDate !== '') {
                     this.props.saveTask({
                         id:       v4(),
                         taskName,
@@ -144,7 +145,7 @@ export default class Modal extends Component {
                     taskUserName: ''
                 });
             } else {
-                alert(
+                console.log(
                     'Input Task Name or Just press cross at the top right angle "x"!'
                 );
             }
@@ -211,8 +212,8 @@ export default class Modal extends Component {
                             className = { Styles.modalBody }
                             onKeyDown = { this.handlerEnter }>
                             <span
-                                onClick = { this.usersListActive }
-                                className = { Styles.username }>
+                                className = { Styles.username }
+                                onClick = { this.usersListActive }>
                                 <span className = { Styles.usernameImage }>
                                     &#8330;
                                 </span>
@@ -227,8 +228,8 @@ export default class Modal extends Component {
                                 />
                             ) : null}
                             <span
-                                onClick = { this.projectsListActive }
-                                className = { Styles.projectname }>
+                                className = { Styles.projectname }
+                                onClick = { this.projectsListActive }>
                                 <span className = { Styles.usernameImage }>
                                     &#8330;
                                 </span>
@@ -238,15 +239,15 @@ export default class Modal extends Component {
                             </span>
                             {projectListActive ? (
                                 <Modalprojects
-                                    setProjectName = { this.setProjectName }
                                     projectListActive = { projectListActive }
+                                    setProjectName = { this.setProjectName }
                                 />
                             ) : null}
                             <span
                                 className = { Styles.calendar }
                                 onClick = { this.setDate }>
                                 <span className = { Styles.calendarImage }>
-                                    <img src = { calendar } alt = 'calendar' />
+                                    <img alt = 'calendar' src = { calendar } />
                                 </span>
                                 <span className = { Styles.calendarText }>
                                     Due Date

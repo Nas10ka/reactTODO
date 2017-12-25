@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Styles from './styles';
 
 export default class Createuser extends Component {
+    static propTypes = {
+        addNewUser:     PropTypes.func.isRequired,
+        inputName:      PropTypes.bool.isRequired,
+        saveUser:       PropTypes.func.isRequired,
+        updateUserList: PropTypes.func.isRequired
+    };
+
     constructor () {
         super();
         this.addUser = ::this.addUser;
@@ -9,13 +17,13 @@ export default class Createuser extends Component {
         this.handleInputNameChange = ::this.handleInputNameChange;
     }
     state = {
-        inputName: this.props,
+        inputName: '',
         user:      ''
     };
 
     handlerEnterName (event) {
         const spaceKey = event.keyCode;
-        const user = this.state.user;
+        const { user } = this.state;
 
         if (spaceKey === 32) {
             event.preventDefault();
@@ -49,20 +57,20 @@ export default class Createuser extends Component {
 
         return (
             <div>
-                <div
-                    onClick = { this.addUser }
+                <span
                     className = { Styles.addUser }
-                    title = 'Add new people - press space bar'>
+                    title = 'Add new people - press space bar'
+                    onClick = { this.addUser }>
                     +
-                </div>
+                </span>
                 {inputName ? (
                     <input
                         className = { Styles.addNewUser }
-                        onKeyDown = { this.handlerEnterName }
-                        onChange = { this.handleInputNameChange }
                         placeholder = 'Add new User'
                         type = 'text'
                         value = { user }
+                        onChange = { this.handleInputNameChange }
+                        onKeyDown = { this.handlerEnterName }
                     />
                 ) : null}
             </div>

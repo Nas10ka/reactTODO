@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Styles from './styles';
 
 export default class Duedate extends Component {
+    static propTypes = {
+        setDate: PropTypes.func
+    };
+
     constructor () {
         super();
         this.setDate = ::this.setDate;
@@ -13,8 +18,6 @@ export default class Duedate extends Component {
         event.preventDefault();
         const { value: finishDate } = event.target;
 
-        console.log(finishDate);
-
         this.setState({
             finishDate
         });
@@ -24,8 +27,8 @@ export default class Duedate extends Component {
         return (
             <input
                 className = { Styles.datepicker }
-                onChange = { this.setDate }
                 type = 'date'
+                onChange = { this.setDate }
             />
         );
     }

@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Styles from './styles';
 
 export default class Createproject extends Component {
+    static propTypes = {
+        addNewProject:     PropTypes.func,
+        inputProjectName:  PropTypes.bool,
+        saveProject:       PropTypes.func,
+        updateProjectList: PropTypes.func
+    };
+
     constructor () {
         super();
         this.addProject = ::this.addProject;
@@ -50,19 +58,19 @@ export default class Createproject extends Component {
         return (
             <div>
                 <div
-                    onClick = { this.addProject }
                     className = { Styles.addProject }
-                    title = 'Add new project name - press space bar'>
+                    title = 'Add new project name - press space bar'
+                    onClick = { this.addProject }>
                     Create New Project
                 </div>
                 {inputProjectName ? (
                     <input
                         className = { Styles.addNewProject }
-                        onKeyDown = { this.handlerEnterProjectName }
-                        onChange = { this.handleInputProjectNameChange }
                         placeholder = 'Add new Project'
                         type = 'text'
                         value = { project }
+                        onChange = { this.handleInputProjectNameChange }
+                        onKeyDown = { this.handlerEnterProjectName }
                     />
                 ) : null}
             </div>

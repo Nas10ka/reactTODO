@@ -12,12 +12,12 @@ import { v4 } from 'uuid';
 // import Styles from './styles';
 
 // COMPONENTS
-import Createbutton from '../Createbutton';
+import Createbutton from '../CreateButton';
 import Todo from '../Todo';
 import Date from '../Date';
-import Createuser from '../Createuser';
+import Createuser from '../CreateUser';
 import User from '../User';
-import Createproject from '../Createproject';
+import Createproject from '../CreateProject';
 import Project from '../Project';
 
 export default class Feed extends Component {
@@ -37,22 +37,22 @@ export default class Feed extends Component {
         this.updateProjectList = ::this.updateProjectList;
     }
     state = {
-        showModal:        false,
-        todosArr:         [],
         checkedTaskIndex: 'false',
         inputName:        false,
         inputProjectName: false,
-        users:            [],
-        projects:         []
+        projects:         [],
+        showModal:        false,
+        todosArr:         [],
+        users:            []
     };
 
-    componentDidMount () {
+    componentWillMount () {
         this.updateTodoList();
         this.updateUserList();
         this.updateProjectList();
     }
 
-    componentWillMount () {
+    componentDidMount () {
         this.updateTodoList();
         this.updateUserList();
         this.updateProjectList();
@@ -119,10 +119,11 @@ export default class Feed extends Component {
         }
     }
 
-    saveUser (user) {
+    saveUser (userObj) {
         let users = JSON.parse(localStorage.getItem('users'));
 
-        user = user.user;
+        const { user } = userObj;
+
         if (!users) {
             users = [user];
             localStorage.setItem('users', JSON.stringify(users));
@@ -137,10 +138,11 @@ export default class Feed extends Component {
             });
         }
     }
-    saveProject (project) {
+    saveProject (projectObj) {
         let projects = JSON.parse(localStorage.getItem('projects'));
 
-        project = project.project;
+        const { project } = projectObj;
+
         if (!projects) {
             projects = [project];
             localStorage.setItem('projects', JSON.stringify(projects));
@@ -167,8 +169,8 @@ export default class Feed extends Component {
         this.setState({
             todosArr: todos
         });
-        if (todos.length == 0) {
-            localStorage.clear();
+        if (todos.length === 0) {
+            localStorage.removeItem('todos');
         } else {
             localStorage.setItem('todos', JSON.stringify(todos));
         }
@@ -177,10 +179,10 @@ export default class Feed extends Component {
     checkTask (id) {
         const todos = localStorage.getItem('todos');
         const todosArr = JSON.parse(todos);
-        const checked = todosArr.findIndex((todo) => todo.id == id);
+        const checked = todosArr.findIndex((todo) => todo.id === id);
         const todoStatus = todosArr[checked].taskDone;
 
-        if (todoStatus == 'false') {
+        if (todoStatus === 'false') {
             todosArr[checked].taskDone = 'true';
         } else {
             todosArr[checked].taskDone = 'false';
@@ -207,12 +209,11 @@ export default class Feed extends Component {
 
         if (todosArr) {
             const filteredTodoByUsername = todosArr.filter((todo) => {
-                if (todo.taskUserName == usernameFilter) {
+                if (todo.taskUserName === usernameFilter) {
                     return true;
                 }
 
                 return false;
-
             });
 
             this.setState({
@@ -226,12 +227,11 @@ export default class Feed extends Component {
 
         if (todosArr) {
             const filteredTodoByProject = todosArr.filter((todo) => {
-                if (todo.taskProject == projectFilter) {
+                if (todo.taskProject === projectFilter) {
                     return true;
                 }
 
                 return false;
-
             });
 
             this.setState({
@@ -248,21 +248,24 @@ export default class Feed extends Component {
             todosArr,
             users
         } = this.state;
+        let todo = [];
+        let user = [];
+        let project = [];
 
         if (todosArr) {
-            var todo = todosArr.map((props) => (
+            todo = todosArr.map((props) => (
                 <Todo
-                    classes = {
-                        props.taskDone == 'true' ? Styles.todone : Styles.todo
-                    }
-                    canDelete = { props.taskDone == 'true' ? 'true' : 'false' }
+                    canDelete = { props.taskDone === 'true' ? 'true' : 'false' }
                     checkTask = { this.checkTask }
+                    classes = {
+                        props.taskDone === 'true' ? Styles.todone : Styles.todo
+                    }
                     deleteTask = { this.deleteTask }
                     description = { props.description }
                     duedate = { props.duedate ? props.duedate : null }
                     finishDate = { props.finishDate ? props.finishDate : null }
-                    key = { props.id }
                     id = { props.id }
+                    key = { props.id }
                     overdue = { props.overdue }
                     taskName = { props.taskName }
                     taskProject = { props.taskProject }
@@ -271,7 +274,7 @@ export default class Feed extends Component {
             ));
         }
         if (users) {
-            var user = users.map((props) => (
+            user = users.map((props) => (
                 <User
                     key = { v4() }
                     tasksFilterByUsername = { this.tasksFilterByUsername }
@@ -280,11 +283,11 @@ export default class Feed extends Component {
             ));
         }
         if (projects) {
-            var project = projects.map((props) => (
+            project = projects.map((props) => (
                 <Project
                     key = { v4() }
-                    tasksFilterByProject = { this.tasksFilterByProject }
                     project = { props }
+                    tasksFilterByProject = { this.tasksFilterByProject }
                 />
             ));
         }
@@ -297,15 +300,15 @@ export default class Feed extends Component {
                         updateTodoList = { this.updateTodoList }
                     />
                     <Date />
-                    {users ? (
-                        <ul className = { Styles.feedUsers }>{[user]}</ul>
-                    ) : null}
-                    <Createuser
-                        addNewUser = { this.addNewUser }
-                        inputName = { inputName }
-                        saveUser = { this.saveUser }
-                        updateUserList = { this.updateUserList }
-                    />
+                    <div className = { Styles.feedUsers }>
+                        {users ? [user] : null}
+                        <Createuser
+                            addNewUser = { this.addNewUser }
+                            inputName = { inputName }
+                            saveUser = { this.saveUser }
+                            updateUserList = { this.updateUserList }
+                        />
+                    </div>
                     <div className = { Styles.projects }>
                         {projects ? (
                             <ul className = { Styles.feedProjects }>{[project]}</ul>
