@@ -8,11 +8,9 @@ import Catcher from '../../components/Catcher';
 export default class App extends Component {
     render () {
         return (
-            <section>
-                <Catcher>
-                    <Feed />
-                </Catcher>
-            </section>
+            <Catcher>
+                <Feed />
+            </Catcher>
         );
     }
 }
